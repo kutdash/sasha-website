@@ -1,0 +1,211 @@
+---
+import Button from './Button.astro';
+import { CHECKOUT, SITE } from '../config';
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__top">
+      <span class="brand name">Sasha Burtasova</span>
+      <nav class="nav">
+        <a href="#about">обо мне</a>
+        <a href="#program">программа</a>
+        <a href="#cases">кейсы</a>
+        <a href="#pricing">тарифы</a>
+      </nav>
+      <Button href={CHECKOUT.generic} variant="bracket">мне надо</Button>
+    </div>
+
+    <div class="hero__main">
+      <p class="hero__eyebrow">
+        старт <span class="underline-pink">{SITE.startDate}</span> · {SITE.duration}
+      </p>
+
+      <h1 class="hero__title h-display">
+        путь<br />
+        видеографа
+      </h1>
+
+      <p class="hero__subtitle body-lg">
+        с нуля до <span class="underline-pink">первых клиентов</span> и стабильного дохода.
+        курс-сопровождение от <span class="name">Саши Буртасовой</span>.
+      </p>
+
+      <div class="hero__cta">
+        <Button href="#pricing" variant="bracket" external={false}>выбрать тариф</Button>
+      </div>
+    </div>
+
+    <div class="hero__media">
+      <!-- Replace with Sasha's portrait video / photo -->
+      <div class="hero__photo hero__photo--1" aria-hidden="true"></div>
+      <div class="hero__photo hero__photo--2" aria-hidden="true"></div>
+      <div class="hero__photo hero__photo--3" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero__stats">
+      <div class="stat">
+        <span class="stat__num">15к → 850к ₽</span>
+        <span class="stat__label">мой доход за 3 года</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">214 → 15.7k</span>
+        <span class="stat__label">подписчики в инсте*</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">20+</span>
+        <span class="stat__label">учениц на наставничестве</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: 24px;
+    padding-bottom: 80px;
+    overflow: hidden;
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+  .hero__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 0 80px;
+  }
+  .brand {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .nav {
+    display: flex;
+    gap: 28px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .nav a {
+    color: var(--ink);
+    transition: color 0.2s;
+  }
+  .nav a:hover {
+    color: var(--pink-deep);
+  }
+
+  .hero__eyebrow {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero__title {
+    margin: 0 0 32px;
+    color: var(--ink);
+  }
+  .hero__subtitle {
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  /* Photo collage — placeholders for now (Sasha will drop real photos / videos) */
+  .hero__media {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 220px 220px;
+    gap: 16px;
+    margin-top: 80px;
+  }
+  .hero__photo {
+    border-radius: 4px;
+    background: var(--bg-soft);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__photo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+    opacity: 0.2;
+  }
+  .hero__photo--1 {
+    grid-column: 1 / span 5;
+    grid-row: 1 / span 2;
+    background-image: linear-gradient(135deg, var(--pink-soft), var(--pink));
+  }
+  .hero__photo--2 {
+    grid-column: 6 / span 4;
+    grid-row: 1;
+    background-image: linear-gradient(135deg, var(--coral), var(--pink));
+  }
+  .hero__photo--3 {
+    grid-column: 6 / span 7;
+    grid-row: 2;
+    background-image: linear-gradient(135deg, var(--bg-soft), var(--pink-soft));
+  }
+  .hero__media > .hero__photo:nth-child(2) {
+    grid-column: 6 / span 7;
+    grid-row: 1;
+  }
+
+  .hero__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .stat__num {
+    font-size: clamp(24px, 2.6vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+  .stat__label {
+    font-size: 14px;
+    color: var(--ink-soft);
+    letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 760px) {
+    .hero__top { padding-bottom: 40px; }
+    .nav { display: none; }
+    .hero__media {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px;
+    }
+    .hero__photo--1,
+    .hero__photo--2,
+    .hero__photo--3 {
+      grid-column: auto !important;
+      grid-row: auto !important;
+    }
+    .hero__photo--1 { grid-column: 1 / -1 !important; }
+    .hero__stats {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+</style>

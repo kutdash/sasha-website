@@ -1,0 +1,78 @@
+---
+const points = [
+  'устала от найма',
+  'хочешь творческую профессию',
+  'боишься и не знаешь, как начать',
+  'нет системы',
+  'низкий чек',
+  'нет клиентов',
+  'блог не работает',
+  'хочешь стать уверенным в себе профессионалом',
+];
+---
+
+<section class="pp section">
+  <div class="container">
+    <p class="h-eyebrow reveal">для кого этот курс</p>
+    <h2 class="h-1 reveal">
+      ты сейчас здесь, <span class="underline-pink">если…</span>
+    </h2>
+
+    <ul class="pp__list">
+      {points.map((p, i) => (
+        <li class="pp__item reveal" style={`transition-delay: ${i * 60}ms`}>
+          <span class="pp__index">{String(i + 1).padStart(2, '0')}</span>
+          <span class="pp__text">{p}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .pp .h-1 {
+    margin-top: 12px;
+    margin-bottom: 64px;
+    max-width: 14ch;
+  }
+  .pp__list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .pp__item {
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+    padding: 28px 12px;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+  .pp__item:nth-child(odd) {
+    border-right: 1px solid var(--line);
+  }
+  .pp__item:hover {
+    background: var(--pink-soft);
+  }
+  .pp__index {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0;
+  }
+  .pp__text {
+    font-size: clamp(20px, 1.9vw, 28px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  @media (max-width: 720px) {
+    .pp__list {
+      grid-template-columns: 1fr;
+    }
+    .pp__item:nth-child(odd) {
+      border-right: none;
+    }
+  }
+</style>

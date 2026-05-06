@@ -1,0 +1,121 @@
+---
+const brands = ['яндекс маркет', 'flowwow', 'kuchenland', 'abrau club', 'rink', 'халва', 'дикая орхидея'];
+---
+
+<section id="about" class="about section">
+  <div class="container about__grid">
+    <div class="about__media reveal">
+      <!-- Sasha's portrait — replace src later -->
+      <div class="portrait" aria-hidden="true">
+        <span>фото саши</span>
+      </div>
+    </div>
+
+    <div class="about__text">
+      <p class="h-eyebrow reveal">коротко обо мне</p>
+      <h2 class="h-1 reveal">
+        меня зовут<br />
+        <span class="underline-pink name">Саша Буртасова</span>
+      </h2>
+
+      <div class="about__paragraphs">
+        <p class="reveal body-md">
+          за три года в видео мой доход вырос
+          <span class="underline-pink">с 15к до 850к&nbsp;₽</span>.
+          я успела поработать с топовыми брендами и обучить более 20 учениц,
+          которые стали действующими видеографами — от свадеб до fashion.
+        </p>
+
+        <p class="reveal body-md">
+          мой блог в инсте* вырос
+          <span class="underline-pink">с 214 подписчиков до 15.7к</span> за последний год —
+          и почти все клиенты приходят именно оттуда.
+        </p>
+      </div>
+
+      <div class="about__brands reveal">
+        <p class="h-eyebrow about__brands-label">снимала для</p>
+        <ul class="about__brands-list">
+          {brands.map((b) => <li>{b}</li>)}
+        </ul>
+      </div>
+
+      <p class="footnote muted">
+        * instagram принадлежит meta, признанной экстремистской организацией и запрещённой на территории рф.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+  }
+  .about__media {
+    position: sticky;
+    top: 24px;
+  }
+  .portrait {
+    aspect-ratio: 4 / 5;
+    border-radius: 4px;
+    background: linear-gradient(135deg, var(--pink-soft) 0%, var(--coral) 100%);
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    font-weight: 500;
+  }
+  .about__text {
+    padding-top: 8px;
+  }
+  .about .h-1 {
+    margin-top: 12px;
+    margin-bottom: 40px;
+  }
+  .about__paragraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 580px;
+    margin-bottom: 48px;
+  }
+  .about__brands {
+    padding: 32px 0 0;
+    border-top: 1px solid var(--line);
+    margin-bottom: 32px;
+  }
+  .about__brands-label {
+    margin-bottom: 16px;
+  }
+  .about__brands-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .about__brands-list li {
+    padding: 8px 14px;
+    border: 1px solid var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .footnote {
+    font-size: 11px;
+    line-height: 1.4;
+    max-width: 540px;
+  }
+  @media (max-width: 860px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+    .about__media {
+      position: static;
+      max-width: 380px;
+    }
+  }
+</style>

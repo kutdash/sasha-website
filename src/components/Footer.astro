@@ -1,0 +1,94 @@
+---
+import { SITE, SOCIALS } from '../config';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <p class="brand name">Sasha Burtasova</p>
+      <p class="muted">курс «путь видеографа»<br />старт {SITE.startDate}</p>
+    </div>
+
+    <div class="footer__links">
+      <p class="h-eyebrow">навигация</p>
+      <ul>
+        <li><a href="#about">обо мне</a></li>
+        <li><a href="#program">программа</a></li>
+        <li><a href="#cases">кейсы</a></li>
+        <li><a href="#pricing">тарифы</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__links">
+      <p class="h-eyebrow">контакты</p>
+      <ul>
+        <li><a href={SOCIALS.telegram} target="_blank" rel="noopener">telegram</a></li>
+        <li><a href={SOCIALS.instagram} target="_blank" rel="noopener">instagram*</a></li>
+        <li><a href={`mailto:${SOCIALS.email}`}>{SOCIALS.email}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__bottom muted">
+    <p>© {year} <span class="name">Sasha Burtasova</span> · путь видеографа</p>
+    <p>* meta признана экстремистской организацией, запрещена в рф</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 72px 0 32px;
+    margin-top: 96px;
+  }
+  .footer .h-eyebrow {
+    color: var(--bg-soft);
+    margin-bottom: 16px;
+  }
+  .footer .muted {
+    color: rgba(244, 242, 238, 0.5);
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 56px;
+  }
+  .footer .brand {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    color: var(--pink);
+  }
+  .footer__links ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .footer__links a {
+    transition: color 0.2s;
+    font-size: 15px;
+  }
+  .footer__links a:hover {
+    color: var(--pink);
+  }
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(244, 242, 238, 0.1);
+    font-size: 12px;
+  }
+  @media (max-width: 720px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+</style>
