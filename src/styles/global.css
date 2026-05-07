@@ -2,8 +2,8 @@
 
 :root {
   /* Brand palette — clean white base, soft pink accent, electric blue underlines (basistaya.ru) */
-  --bg: #ffffff;
-  --bg-soft: #f4f2ee;
+  --bg: #f4f2ee;
+  --bg-soft: #ece8e1;
   --pink: #ffc4da;
   --pink-soft: #ffe1ec;
   --pink-deep: #e94d80;
@@ -91,6 +91,7 @@ ul {
   line-height: 0.96;
   letter-spacing: -0.04em;
   text-transform: lowercase;
+  color: var(--pink-deep);
 }
 
 .h-2 {
