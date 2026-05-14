@@ -2,18 +2,18 @@
 
 :root {
   /* Brand palette — clean white base, soft pink accent, electric blue underlines (basistaya.ru) */
-  --bg: #f4f2ee;
-  --bg-soft: #ece8e1;
-  --pink: #ffc4da;
-  --pink-soft: #ffe1ec;
-  --pink-deep: #e94d80;
-  --pink-deeper: #c93465;
+  --bg: #f6f4ec;
+  --bg-soft: #e8e4d6;
+  --pink: #c5cdd5;
+  --pink-soft: #dde3e9;
+  --pink-deep: #708090;
+  --pink-deeper: #4d5a66;
   --blue: #2015ff; /* electric blue — for underlines & accents */
   --coral: #fa876b;
   --terracotta: #963b1f;
   --ink: #000000;
   --ink-soft: #6b6b6b;
-  --line: #e6e2da;
+  --line: #ddd9c8;
   --white: #ffffff;
 
   /* Typography */

@@ -1,0 +1,39 @@
+---
+// Full-width horizontal showreel banner — placed between sections to break the rhythm
+---
+
+<section class="showreel">
+  <video
+    class="showreel__video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    aria-hidden="true"
+  >
+    <source src="/videos/showreel.mp4" type="video/mp4" />
+  </video>
+</section>
+
+<style>
+  .showreel {
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg-soft);
+    margin: clamp(40px, 6vw, 96px) 0;
+  }
+  .showreel__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  @media (max-width: 760px) {
+    .showreel {
+      margin: 32px 0;
+    }
+  }
+</style>

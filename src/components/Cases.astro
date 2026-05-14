@@ -1,0 +1,191 @@
+---
+import { CASES } from '../config';
+---
+
+<section id="cases" class="cases section">
+  <div class="container">
+    <p class="h-eyebrow reveal">истории учениц</p>
+    <h2 class="h-1 reveal">
+      ушли с <span class="cases__accent">результатом</span>
+    </h2>
+
+    <div class="cases__grid">
+      {CASES.map((c, i) => (
+        <article class="case reveal" style={`transition-delay: ${i * 80}ms`}>
+          <header class="case__head">
+            <div class="case__avatar" aria-hidden="true">
+              <span>{c.name[0]}</span>
+            </div>
+            <div class="case__id">
+              <p class="case__name">{c.name}</p>
+              <a href={c.handleUrl} class="case__handle" target="_blank" rel="noopener">{c.handle}</a>
+            </div>
+          </header>
+
+          <p class="case__hook">{c.hookStat}</p>
+
+          <div class="case__cols">
+            <div class="case__col">
+              <p class="case__col-label">до</p>
+              <ul>
+                {c.before.map((b) => <li>{b.toLowerCase()}</li>)}
+              </ul>
+            </div>
+            <div class="case__col case__col--after">
+              <p class="case__col-label">после</p>
+              <ul>
+                {c.after.map((a) => <li>{a.toLowerCase()}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          <blockquote class="case__quote">«{c.quote}»</blockquote>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cases .h-1 {
+    margin-top: 12px;
+    margin-bottom: 64px;
+  }
+  .cases__accent {
+    color: var(--pink-deep);
+  }
+
+  .cases__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .case {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 28px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+  }
+  .case:hover {
+    border-color: var(--ink);
+  }
+
+  .case__head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .case__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--pink-soft);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--pink-deep);
+    text-transform: uppercase;
+    letter-spacing: 0;
+  }
+  .case__id {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-transform: lowercase;
+  }
+  .case__name {
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .case__handle {
+    font-size: 13px;
+    color: var(--ink-soft);
+    transition: color 0.2s ease;
+  }
+  .case__handle:hover {
+    color: var(--pink-deep);
+  }
+
+  .case__hook {
+    font-family: var(--font-sans);
+    font-size: clamp(20px, 1.7vw, 24px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    text-transform: lowercase;
+    color: var(--pink-deep);
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .case__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .case__col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .case__col-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .case__col ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .case__col li {
+    font-size: 14px;
+    line-height: 1.4;
+    padding-left: 16px;
+    position: relative;
+  }
+  .case__col li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 8px;
+    height: 1px;
+    background: var(--ink-soft);
+  }
+  .case__col--after li::before {
+    background: var(--pink-deep);
+  }
+
+  .case__quote {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding: 20px 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 760px) {
+    .cases__grid {
+      grid-template-columns: 1fr;
+    }
+    .case {
+      padding: 24px 20px;
+    }
+    .case__cols {
+      gap: 16px;
+    }
+  }
+</style>

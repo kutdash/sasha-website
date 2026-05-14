@@ -1,0 +1,106 @@
+---
+import { MODULES } from '../config';
+---
+
+<section id="program" class="program section">
+  <div class="container">
+    <p class="h-eyebrow reveal">программа курса · 8 модулей</p>
+    <h2 class="h-1 reveal">
+      путь до <span class="program__accent">первых клиентов</span>
+    </h2>
+
+    <ol class="program__list">
+      {MODULES.map((m, i) => (
+        <li class="program__item reveal" style={`transition-delay: ${i * 50}ms`}>
+          <span class="program__num">{String(i + 1).padStart(2, '0')}</span>
+          <div class="program__body">
+            <h3 class="program__title">
+              {m.title}
+              {m.isNew && <span class="program__badge">new</span>}
+            </h3>
+            <p class="program__desc">{m.description}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .program .h-1 {
+    margin-top: 12px;
+    margin-bottom: 64px;
+    max-width: 18ch;
+  }
+  .program__accent {
+    color: var(--pink-deep);
+  }
+
+  .program__list {
+    list-style: none;
+    border-top: 1px solid var(--ink);
+  }
+  .program__item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    align-items: baseline;
+    padding: 28px 12px;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s ease, padding-left 0.3s ease;
+  }
+  .program__item:hover {
+    background: var(--pink-soft);
+    padding-left: 24px;
+  }
+  .program__num {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .program__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .program__title {
+    font-family: var(--font-sans);
+    font-size: clamp(20px, 1.9vw, 28px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .program__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    background: var(--pink-deep);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .program__desc {
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.4;
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
+
+  @media (max-width: 720px) {
+    .program__item {
+      grid-template-columns: 56px 1fr;
+      gap: 16px;
+      padding: 22px 8px;
+    }
+    .program__item:hover {
+      padding-left: 12px;
+    }
+  }
+</style>

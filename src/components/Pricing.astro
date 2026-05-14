@@ -1,0 +1,279 @@
+---
+import { TARIFFS, SITE } from '../config';
+---
+
+<section id="pricing" class="pricing section">
+  <div class="container">
+    <p class="h-eyebrow reveal">тарифы</p>
+    <h2 class="h-1 reveal">
+      выбери свой <span class="pricing__accent">формат</span>
+    </h2>
+    <p class="pricing__intro reveal body-md">
+      специальные цены действуют до старта · {SITE.startDate}
+    </p>
+
+    <div class="pricing__grid">
+      {TARIFFS.map((t, i) => (
+        <article
+          class:list={[
+            'tariff',
+            t.highlighted && 'tariff--hl',
+            t.dark && 'tariff--dark',
+            t.sold && 'tariff--sold',
+          ]}
+          style={`transition-delay: ${i * 80}ms`}
+        >
+          <header class="tariff__head">
+            <div class="tariff__top">
+              <h3 class="tariff__name">{t.name.toLowerCase()}</h3>
+              {t.chip && !t.sold && <span class="tariff__chip">{t.chip}</span>}
+              {t.sold && <span class="tariff__chip tariff__chip--sold">sold out</span>}
+            </div>
+            {t.seats && <p class="tariff__seats">{t.seats}</p>}
+            <p class="tariff__tagline">{t.tagline.toLowerCase()}</p>
+          </header>
+
+          <div class="tariff__price">
+            {t.oldPrice && <span class="tariff__old">{t.oldPrice}</span>}
+            <span class="tariff__now">{t.price}</span>
+            <span class="tariff__usd">/ {t.priceUsd}</span>
+          </div>
+
+          <ul class="tariff__features">
+            {t.features.map((f) => (
+              <li>{f.toLowerCase()}</li>
+            ))}
+          </ul>
+
+          {t.note && <p class="tariff__note">* {t.note.toLowerCase()}</p>}
+
+          <a
+            href={t.checkout}
+            class:list={['tariff__btn', t.highlighted && 'tariff__btn--hl']}
+            target={t.checkout.startsWith('http') ? '_blank' : undefined}
+            rel={t.checkout.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            <span>{t.cta.toLowerCase()}</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <p class="pricing__installments reveal muted">
+      доступна рассрочка на 6 и 12 месяцев · от 3 325 ₽/мес · все проценты беру на себя
+    </p>
+  </div>
+</section>
+
+<style>
+  .pricing .h-1 {
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+  .pricing__accent {
+    color: var(--pink-deep);
+  }
+  .pricing__intro {
+    margin-bottom: 56px;
+    color: var(--ink-soft);
+  }
+
+  .pricing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .tariff {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px 28px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    border-radius: 6px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+  .tariff:hover {
+    border-color: var(--ink);
+  }
+  .tariff--hl {
+    background: var(--pink-soft);
+    border-color: var(--pink-deep);
+  }
+  .tariff--dark {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .tariff--dark .tariff__head {
+    border-bottom-color: rgba(246, 244, 236, 0.2);
+  }
+  .tariff--dark .tariff__seats,
+  .tariff--dark .tariff__usd,
+  .tariff--dark .tariff__old,
+  .tariff--dark .tariff__note {
+    color: rgba(246, 244, 236, 0.55);
+  }
+  .tariff--dark .tariff__chip {
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .tariff--dark .tariff__features li::before {
+    background: var(--bg);
+  }
+  .tariff--dark .tariff__btn {
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .tariff--dark .tariff__btn:hover {
+    background: var(--pink-deep);
+    color: var(--bg);
+  }
+  .tariff--sold {
+    opacity: 0.65;
+  }
+
+  .tariff__head {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tariff__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .tariff__name {
+    font-family: var(--font-sans);
+    font-size: clamp(28px, 2.6vw, 36px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-transform: lowercase;
+  }
+  .tariff__chip {
+    padding: 4px 10px;
+    background: var(--pink-deep);
+    color: var(--bg);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tariff__chip--sold {
+    background: var(--ink);
+  }
+  .tariff__seats {
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 0;
+  }
+  .tariff__tagline {
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  .tariff__price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .tariff__old {
+    font-size: 16px;
+    color: var(--ink-soft);
+    text-decoration: line-through;
+  }
+  .tariff__now {
+    font-size: clamp(28px, 2.6vw, 36px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  .tariff__usd {
+    font-size: 14px;
+    color: var(--ink-soft);
+  }
+
+  .tariff__features {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .tariff__features li {
+    font-size: 14px;
+    line-height: 1.4;
+    padding-left: 22px;
+    position: relative;
+  }
+  .tariff__features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 12px;
+    height: 1px;
+    background: var(--pink-deep);
+  }
+
+  .tariff__note {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+  }
+
+  .tariff__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    transition: background 0.25s ease, transform 0.25s ease;
+    margin-top: auto;
+  }
+  .tariff__btn svg {
+    transition: transform 0.25s ease;
+  }
+  .tariff__btn:hover {
+    background: var(--pink-deep);
+    transform: translateY(-2px);
+  }
+  .tariff__btn:hover svg {
+    transform: translateX(3px);
+  }
+  .tariff__btn--hl {
+    background: var(--pink-deep);
+  }
+  .tariff__btn--hl:hover {
+    background: var(--pink-deeper);
+  }
+
+  .pricing__installments {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  @media (max-width: 960px) {
+    .pricing__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
