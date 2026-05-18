@@ -1,0 +1,142 @@
+---
+import { REELS } from '../config';
+---
+
+<section id="reels" class="reels section">
+  <div class="container">
+    <p class="h-eyebrow reveal">залетевшие рилсы учениц</p>
+    <h2 class="h-1 reveal">
+      результат, который <span class="reels__accent">видно</span>
+    </h2>
+    <p class="reels__lead reveal body-md">
+      после упаковки блога ваши рилсы могут стать заметно эффективнее и привлекать больше клиентов
+    </p>
+
+    <div class="reels__grid">
+      {REELS.map((r, i) => (
+        <a
+          href={r.url}
+          class="reel reveal"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={`transition-delay: ${i * 80}ms`}
+        >
+          <img class="reel__cover" src={r.cover} alt="Reel" loading="lazy" />
+          <div class="reel__overlay">
+            <span class="reel__play" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+            <span class="reel__views">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5c-1.7-4.4-6-7.5-11-7.5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+              </svg>
+              {r.views}
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reels .h-1 {
+    margin-top: 12px;
+    margin-bottom: 24px;
+  }
+  .reels__accent {
+    color: var(--pink-deep);
+  }
+  .reels__lead {
+    max-width: 640px;
+    color: var(--ink-soft);
+    margin-bottom: 56px;
+  }
+
+  .reels__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .reel {
+    position: relative;
+    display: block;
+    aspect-ratio: 9 / 16;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-soft);
+    transition: transform 0.3s ease;
+  }
+  .reel:hover {
+    transform: translateY(-4px);
+  }
+  .reel__cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .reel:hover .reel__cover {
+    transform: scale(1.04);
+  }
+  .reel__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 50%);
+    pointer-events: none;
+  }
+  .reel__play {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .reel__play svg {
+    margin-left: 4px;
+  }
+  .reel:hover .reel__play {
+    background: var(--pink-deep);
+    color: var(--bg);
+    transform: scale(1.08);
+  }
+  .reel__views {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+  }
+
+  @media (max-width: 720px) {
+    .reels__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .reel:nth-child(3) {
+      grid-column: span 2;
+      max-width: 50%;
+      margin: 0 auto;
+      width: 100%;
+    }
+  }
+</style>

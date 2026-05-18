@@ -1,5 +1,7 @@
 ---
 import { CASES } from '../config';
+
+const handleSlug = (handle: string) => handle.replace(/^@/, '');
 ---
 
 <section id="cases" class="cases section">
@@ -12,34 +14,42 @@ import { CASES } from '../config';
     <div class="cases__grid">
       {CASES.map((c, i) => (
         <article class="case reveal" style={`transition-delay: ${i * 80}ms`}>
-          <header class="case__head">
-            <div class="case__avatar" aria-hidden="true">
-              <span>{c.name[0]}</span>
-            </div>
-            <div class="case__id">
-              <p class="case__name">{c.name}</p>
-              <a href={c.handleUrl} class="case__handle" target="_blank" rel="noopener">{c.handle}</a>
-            </div>
-          </header>
+          <aside class="case__side">
+            <a href={c.handleUrl} class="case__head" target="_blank" rel="noopener noreferrer">
+              <img
+                class="case__avatar"
+                src={c.avatar ?? `https://unavatar.io/instagram/${handleSlug(c.handle)}`}
+                alt={`Аватар ${c.name}`}
+                loading="lazy"
+                width="64"
+                height="64"
+              />
+              <div class="case__id">
+                <p class="case__name">{c.name}</p>
+                <p class="case__handle">{c.handle} <span class="case__arrow">↗</span></p>
+              </div>
+            </a>
+            <blockquote class="case__quote">«{c.quote}»</blockquote>
+          </aside>
 
-          <p class="case__hook">{c.hookStat}</p>
+          <div class="case__main">
+            <p class="case__hook">{c.hookStat}</p>
 
-          <div class="case__cols">
-            <div class="case__col">
-              <p class="case__col-label">до</p>
-              <ul>
-                {c.before.map((b) => <li>{b.toLowerCase()}</li>)}
-              </ul>
-            </div>
-            <div class="case__col case__col--after">
-              <p class="case__col-label">после</p>
-              <ul>
-                {c.after.map((a) => <li>{a.toLowerCase()}</li>)}
-              </ul>
+            <div class="case__cols">
+              <div class="case__col">
+                <p class="case__col-label">было</p>
+                <ul>
+                  {c.before.map((b) => <li>{b.toLowerCase()}</li>)}
+                </ul>
+              </div>
+              <div class="case__col case__col--after">
+                <p class="case__col-label">стало</p>
+                <ul>
+                  {c.after.map((a) => <li>{a.toLowerCase()}</li>)}
+                </ul>
+              </div>
             </div>
           </div>
-
-          <blockquote class="case__quote">«{c.quote}»</blockquote>
         </article>
       ))}
     </div>
@@ -57,84 +67,100 @@ import { CASES } from '../config';
 
   .cases__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 16px;
   }
 
   .case {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    padding: 32px 28px;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 48px;
+    padding: 40px 36px;
     background: var(--bg);
     border: 1px solid var(--line);
     border-radius: 6px;
     transition: border-color 0.3s ease;
+    align-items: start;
   }
   .case:hover {
     border-color: var(--ink);
   }
 
   .case__head {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 14px;
+    align-self: flex-start;
+    transition: transform 0.25s ease;
+  }
+  .case__head:hover {
+    transform: translateX(2px);
+  }
+  .case__head:hover .case__handle {
+    color: var(--pink-deep);
+  }
+  .case__side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .case__main {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    min-width: 0;
   }
   .case__avatar {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
+    object-fit: cover;
     background: var(--pink-soft);
-    display: grid;
-    place-items: center;
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--pink-deep);
-    text-transform: uppercase;
-    letter-spacing: 0;
+    display: block;
   }
   .case__id {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    text-transform: lowercase;
   }
   .case__name {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 17px;
     letter-spacing: -0.01em;
+    text-transform: lowercase;
   }
   .case__handle {
     font-size: 13px;
     color: var(--ink-soft);
     transition: color 0.2s ease;
   }
-  .case__handle:hover {
-    color: var(--pink-deep);
+  .case__arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+  }
+  .case__head:hover .case__arrow {
+    transform: translate(2px, -2px);
   }
 
   .case__hook {
     font-family: var(--font-sans);
-    font-size: clamp(20px, 1.7vw, 24px);
+    font-size: clamp(22px, 1.9vw, 28px);
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.025em;
     text-transform: lowercase;
     color: var(--pink-deep);
-    padding: 16px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
   }
 
   .case__cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 24px;
   }
   .case__col {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
   .case__col-label {
     font-size: 11px;
@@ -142,8 +168,6 @@ import { CASES } from '../config';
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-soft);
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--line);
   }
   .case__col ul {
     display: flex;
@@ -170,22 +194,20 @@ import { CASES } from '../config';
   }
 
   .case__quote {
-    font-size: 15px;
-    line-height: 1.5;
+    font-family: var(--font-sans);
+    font-size: clamp(17px, 1.4vw, 20px);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
     color: var(--ink);
-    padding: 20px 0 0;
-    border-top: 1px solid var(--line);
+    text-transform: lowercase;
   }
 
   @media (max-width: 760px) {
-    .cases__grid {
-      grid-template-columns: 1fr;
-    }
     .case {
-      padding: 24px 20px;
-    }
-    .case__cols {
-      gap: 16px;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 28px 22px;
     }
   }
 </style>
