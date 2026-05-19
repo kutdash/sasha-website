@@ -1,13 +1,38 @@
 ---
+import Button from './Button.astro';
 const points = [
-  'устала от найма',
-  'хочешь творческую профессию',
-  'боишься и не знаешь, как начать',
-  'нет системы',
-  'низкий чек',
-  'нет клиентов',
-  'блог не работает',
-  'хочешь стать уверенным в себе профессионалом',
+  {
+    pain: 'устала от найма',
+    result: 'уйдёшь из найма и будешь работать 4–5 часов из любой точки мира, как мои ученики',
+  },
+  {
+    pain: 'хочешь творческую профессию',
+    result: 'получишь профессию, где творчество приносит реальный доход и нет потолка',
+  },
+  {
+    pain: 'боишься и не знаешь, как начать',
+    result: 'пройдёшь путь по моей системе и сможешь получить первых клиентов ещё на курсе',
+  },
+  {
+    pain: 'нет системы',
+    result: '8 модулей и 31 урок — от настроек камеры до продаж и продюсирования',
+  },
+  {
+    pain: 'низкий чек',
+    result: 'научишься упаковывать офферы, отрабатывать возражения и поднимешь чек',
+  },
+  {
+    pain: 'нет клиентов',
+    result: '3 схемы поиска клиентов · воркшоп по продажам с 20+ заявками в реальном времени',
+  },
+  {
+    pain: 'блог не работает',
+    result: 'упакуешь свой блог и начнёшь делать рилсы, которые приводят клиентов',
+  },
+  {
+    pain: 'хочешь стать уверенным в себе профессионалом',
+    result: 'соберёшь 5 коммерческих видео в портфолио и научишься продюсировать съёмки',
+  },
 ];
 ---
 
@@ -21,11 +46,21 @@ const points = [
     <ul class="pp__list">
       {points.map((p, i) => (
         <li class="pp__item reveal" style={`transition-delay: ${i * 60}ms`}>
-          <span class="pp__index">{String(i + 1).padStart(2, '0')}</span>
-          <span class="pp__text">{p}</span>
+          <details class="pp__details">
+            <summary class="pp__summary">
+              <span class="pp__index">{String(i + 1).padStart(2, '0')}</span>
+              <span class="pp__text">{p.pain}</span>
+              <span class="pp__chevron" aria-hidden="true">+</span>
+            </summary>
+            <p class="pp__result">{p.result}</p>
+          </details>
         </li>
       ))}
     </ul>
+
+    <div class="pp__cta reveal">
+      <Button href="#pricing" variant="bracket" external={false}>это про меня</Button>
+    </div>
   </div>
 </section>
 
@@ -38,14 +73,11 @@ const points = [
   .pp__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    align-items: start;
     gap: 0;
     border-top: 1px solid var(--ink);
   }
   .pp__item {
-    display: flex;
-    gap: 24px;
-    align-items: baseline;
-    padding: 28px 12px;
     border-bottom: 1px solid var(--line);
     transition: background 0.3s ease;
   }
@@ -55,17 +87,57 @@ const points = [
   .pp__item:hover {
     background: var(--pink-soft);
   }
+  .pp__details {
+    width: 100%;
+  }
+  .pp__summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    gap: 24px;
+    align-items: baseline;
+    padding: 28px 12px;
+  }
+  .pp__summary::-webkit-details-marker {
+    display: none;
+  }
   .pp__index {
     font-size: 13px;
     font-weight: 500;
     color: var(--ink-soft);
     letter-spacing: 0;
+    flex-shrink: 0;
   }
   .pp__text {
     font-size: clamp(20px, 1.9vw, 28px);
     font-weight: 500;
     line-height: 1.2;
     letter-spacing: -0.02em;
+    flex: 1;
+  }
+  .pp__chevron {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink-soft);
+    transition: transform 0.25s ease, color 0.25s ease;
+    flex-shrink: 0;
+  }
+  .pp__details[open] .pp__chevron {
+    transform: rotate(45deg);
+    color: var(--pink-deep);
+  }
+  .pp__result {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    padding: 0 12px 24px 56px;
+    max-width: 50ch;
+  }
+  .pp__cta {
+    margin-top: 48px;
+    display: flex;
+    justify-content: flex-start;
   }
   @media (max-width: 720px) {
     .pp__list {
@@ -73,6 +145,16 @@ const points = [
     }
     .pp__item:nth-child(odd) {
       border-right: none;
+    }
+    .pp__summary {
+      padding: 22px 8px;
+      gap: 16px;
+    }
+    .pp__result {
+      padding: 0 8px 22px 44px;
+    }
+    .pp__cta {
+      margin-top: 32px;
     }
   }
 </style>

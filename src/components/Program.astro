@@ -1,5 +1,6 @@
 ---
 import { MODULES } from '../config';
+import Button from './Button.astro';
 ---
 
 <section id="program" class="program section">
@@ -12,17 +13,24 @@ import { MODULES } from '../config';
     <ol class="program__list">
       {MODULES.map((m, i) => (
         <li class="program__item reveal" style={`transition-delay: ${i * 50}ms`}>
-          <span class="program__num">{String(i + 1).padStart(2, '0')}</span>
-          <div class="program__body">
-            <h3 class="program__title">
-              {m.title}
-              {m.isNew && <span class="program__badge">new</span>}
-            </h3>
+          <details class="program__details">
+            <summary class="program__summary">
+              <span class="program__num">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="program__title">
+                {m.title}
+                {m.isNew && <span class="program__badge">new</span>}
+              </h3>
+              <span class="program__chevron" aria-hidden="true">+</span>
+            </summary>
             <p class="program__desc">{m.description}</p>
-          </div>
+          </details>
         </li>
       ))}
     </ol>
+
+    <div class="program__cta reveal">
+      <Button href="#pricing" variant="bracket" external={false}>выбрать тариф</Button>
+    </div>
   </div>
 </section>
 
@@ -41,27 +49,35 @@ import { MODULES } from '../config';
     border-top: 1px solid var(--ink);
   }
   .program__item {
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 32px;
-    align-items: baseline;
-    padding: 28px 12px;
     border-bottom: 1px solid var(--line);
-    transition: background 0.3s ease, padding-left 0.3s ease;
+    transition: background 0.3s ease;
   }
   .program__item:hover {
     background: var(--pink-soft);
+  }
+  .program__details {
+    width: 100%;
+  }
+  .program__summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 32px;
+    align-items: baseline;
+    padding: 28px 12px;
+    transition: padding-left 0.3s ease;
+  }
+  .program__summary::-webkit-details-marker {
+    display: none;
+  }
+  .program__item:hover .program__summary {
     padding-left: 24px;
   }
   .program__num {
     font-size: 14px;
     font-weight: 500;
     color: var(--ink-soft);
-  }
-  .program__body {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
   }
   .program__title {
     font-family: var(--font-sans);
@@ -86,21 +102,46 @@ import { MODULES } from '../config';
     text-transform: uppercase;
     border-radius: 999px;
   }
+  .program__chevron {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink-soft);
+    transition: transform 0.25s ease, color 0.25s ease;
+    transform-origin: center;
+  }
+  .program__details[open] .program__chevron {
+    transform: rotate(45deg);
+    color: var(--pink-deep);
+  }
   .program__desc {
     font-size: clamp(15px, 1.1vw, 17px);
     line-height: 1.4;
     color: var(--ink-soft);
     max-width: 60ch;
+    padding: 0 12px 28px 124px;
+  }
+
+  .program__cta {
+    margin-top: 48px;
+    display: flex;
+    justify-content: flex-start;
   }
 
   @media (max-width: 720px) {
-    .program__item {
-      grid-template-columns: 56px 1fr;
+    .program__summary {
+      grid-template-columns: 56px 1fr auto;
       gap: 16px;
       padding: 22px 8px;
     }
-    .program__item:hover {
+    .program__item:hover .program__summary {
       padding-left: 12px;
+    }
+    .program__desc {
+      padding: 0 8px 22px 72px;
+    }
+    .program__cta {
+      margin-top: 32px;
     }
   }
 </style>

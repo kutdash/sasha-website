@@ -18,6 +18,7 @@ import { OUTCOMES } from '../config';
           <p class="outcome__headline">{o.headline}</p>
           <h3 class="outcome__title">{o.title}</h3>
           <p class="outcome__desc">{o.description}</p>
+          {o.note && <p class="outcome__note">{o.note}</p>}
         </article>
       ))}
     </div>
@@ -88,6 +89,20 @@ import { OUTCOMES } from '../config';
     font-size: 14px;
     line-height: 1.5;
     color: var(--ink-soft);
+  }
+
+  .outcome__note {
+    align-self: flex-start;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    color: var(--pink-deep);
+    padding: 6px 10px;
+    border: 1px solid var(--pink-deep);
+    border-radius: 999px;
+    margin-top: -4px;
   }
 
   @media (max-width: 960px) {
