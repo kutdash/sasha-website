@@ -1,4 +1,16 @@
 ---
+const vectors = [
+  {
+    num: '01',
+    title: 'продвижение',
+    body: 'выстроишь систему привлечения клиентов: офферы, поиск, продажи',
+  },
+  {
+    num: '02',
+    title: 'прокачка видеографии',
+    body: 'прокачаешь скиллы съёмки и монтажа, соберёшь сильное портфолио',
+  },
+];
 ---
 
 <section id="approach" class="approach section">
@@ -8,9 +20,14 @@
       обучение строится <span class="approach__accent">под твои задачи</span>
     </h2>
 
-    <div class="approach__pillars reveal">
-      <div class="approach__pillar">продвижение</div>
-      <div class="approach__pillar">прокачка видеографии</div>
+    <div class="approach__grid">
+      {vectors.map((v, i) => (
+        <article class="approach__card reveal" style={`transition-delay: ${i * 80}ms`}>
+          <p class="approach__num">{v.num}</p>
+          <h3 class="approach__title">{v.title}</h3>
+          <p class="approach__body">{v.body}</p>
+        </article>
+      ))}
     </div>
 
     <p class="approach__note reveal">
@@ -28,47 +45,56 @@
   .approach__accent {
     color: var(--pink-deep);
   }
-  .approach__pillars {
+  .approach__grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
+    gap: 24px;
   }
-  .approach__pillar {
+  .approach__card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 36px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .approach__num {
     font-family: var(--font-sans);
-    font-size: clamp(28px, 4vw, 56px);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .approach__title {
+    font-family: var(--font-sans);
+    font-size: clamp(26px, 3vw, 40px);
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.03em;
     text-transform: lowercase;
     color: var(--ink);
-    padding: 40px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
   }
-  .approach__pillar:first-child {
-    border-right: 1px solid var(--line);
-  }
-  .approach__note {
-    margin-top: 32px;
+  .approach__body {
     font-size: clamp(15px, 1.1vw, 17px);
     line-height: 1.5;
     color: var(--ink-soft);
-    max-width: 60ch;
+  }
+  .approach__note {
+    margin-top: 32px;
+    font-size: clamp(14px, 1.05vw, 16px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 64ch;
   }
   @media (max-width: 720px) {
-    .approach__pillars {
+    .approach__grid {
       grid-template-columns: 1fr;
+      gap: 16px;
     }
-    .approach__pillar {
-      padding: 28px 16px;
-    }
-    .approach__pillar:first-child {
-      border-right: none;
-      border-bottom: 1px solid var(--line);
+    .approach__card {
+      padding: 28px 24px;
     }
   }
 </style>
