@@ -8,8 +8,13 @@
       обучение строится <span class="approach__accent">под твои задачи</span>
     </h2>
 
-    <p class="approach__lead reveal">
-      продвижение и прокачка видеографии — два направления роста. ты сама выбираешь акцент: фокус на одном или работа в обоих сразу
+    <div class="approach__pillars reveal">
+      <div class="approach__pillar">продвижение</div>
+      <div class="approach__pillar">прокачка видеографии</div>
+    </div>
+
+    <p class="approach__note reveal">
+      ты сама выбираешь акцент: фокус на одном из направлений или работа в обоих сразу
     </p>
   </div>
 </section>
@@ -17,16 +22,53 @@
 <style>
   .approach .h-1 {
     margin-top: 12px;
-    margin-bottom: 32px;
+    margin-bottom: 56px;
     max-width: 18ch;
   }
   .approach__accent {
     color: var(--pink-deep);
   }
-  .approach__lead {
-    font-size: clamp(18px, 1.6vw, 24px);
+  .approach__pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .approach__pillar {
+    font-family: var(--font-sans);
+    font-size: clamp(28px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    text-transform: lowercase;
+    color: var(--ink);
+    padding: 40px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .approach__pillar:first-child {
+    border-right: 1px solid var(--line);
+  }
+  .approach__note {
+    margin-top: 32px;
+    font-size: clamp(15px, 1.1vw, 17px);
     line-height: 1.5;
     color: var(--ink-soft);
-    max-width: 56ch;
+    max-width: 60ch;
+  }
+  @media (max-width: 720px) {
+    .approach__pillars {
+      grid-template-columns: 1fr;
+    }
+    .approach__pillar {
+      padding: 28px 16px;
+    }
+    .approach__pillar:first-child {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
   }
 </style>
