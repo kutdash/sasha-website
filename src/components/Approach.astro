@@ -1,15 +1,7 @@
 ---
 const vectors = [
-  {
-    num: '01',
-    title: 'продвижение',
-    body: 'выстроишь систему привлечения клиентов: офферы, поиск, продажи',
-  },
-  {
-    num: '02',
-    title: 'прокачка видеографии',
-    body: 'прокачаешь скиллы съёмки и монтажа, соберёшь сильное портфолио',
-  },
+  { num: '01', label: 'продвижение' },
+  { num: '02', label: 'прокачка видеографии' },
 ];
 ---
 
@@ -20,15 +12,14 @@ const vectors = [
       обучение строится <span class="approach__accent">под твои задачи</span>
     </h2>
 
-    <div class="approach__grid">
+    <ul class="approach__list">
       {vectors.map((v, i) => (
-        <article class="approach__card reveal" style={`transition-delay: ${i * 80}ms`}>
-          <p class="approach__num">{v.num}</p>
-          <h3 class="approach__title">{v.title}</h3>
-          <p class="approach__body">{v.body}</p>
-        </article>
+        <li class="approach__item reveal" style={`transition-delay: ${i * 80}ms`}>
+          <span class="approach__index">{v.num}</span>
+          <span class="approach__text">{v.label}</span>
+        </li>
       ))}
-    </div>
+    </ul>
 
     <p class="approach__note reveal">
       ты сама выбираешь акцент: фокус на одном из направлений или работа в обоих сразу
@@ -45,41 +36,34 @@ const vectors = [
   .approach__accent {
     color: var(--pink-deep);
   }
-  .approach__grid {
+  .approach__list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
   }
-  .approach__card {
+  .approach__item {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 40px 36px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 6px;
+    gap: 24px;
+    align-items: baseline;
+    padding: 28px 12px;
   }
-  .approach__num {
-    font-family: var(--font-sans);
-    font-size: 14px;
+  .approach__item:first-child {
+    border-right: 1px solid var(--line);
+  }
+  .approach__index {
+    font-size: 13px;
     font-weight: 500;
     color: var(--ink-soft);
+    letter-spacing: 0;
+    flex-shrink: 0;
   }
-  .approach__title {
-    font-family: var(--font-sans);
-    font-size: clamp(26px, 3vw, 40px);
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    text-transform: lowercase;
-    color: var(--ink);
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--line);
-  }
-  .approach__body {
-    font-size: clamp(15px, 1.1vw, 17px);
-    line-height: 1.5;
-    color: var(--ink-soft);
+  .approach__text {
+    font-size: clamp(20px, 1.9vw, 28px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
   .approach__note {
     margin-top: 32px;
@@ -89,12 +73,16 @@ const vectors = [
     max-width: 64ch;
   }
   @media (max-width: 720px) {
-    .approach__grid {
+    .approach__list {
       grid-template-columns: 1fr;
-      gap: 16px;
     }
-    .approach__card {
-      padding: 28px 24px;
+    .approach__item:first-child {
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .approach__item {
+      padding: 22px 8px;
+      gap: 16px;
     }
   }
 </style>
