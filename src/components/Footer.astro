@@ -28,10 +28,18 @@ const year = new Date().getFullYear();
         <li><a href={`mailto:${SOCIALS.email}`}>{SOCIALS.email}</a></li>
       </ul>
     </div>
+
+    <div class="footer__links">
+      <p class="h-eyebrow">документы</p>
+      <ul>
+        <li><a href="/oferta.pdf" target="_blank" rel="noopener">публичная оферта</a></li>
+      </ul>
+    </div>
   </div>
 
   <div class="container footer__bottom muted">
     <p>© {year} <span class="name">Sasha Burtasova</span> · путь видеографа</p>
+    <p>ИП Василенко А.С. · ИНН 773424863419 · ОГРНИП 324774600771585</p>
     <p>* meta признана экстремистской организацией, запрещена в рф</p>
   </div>
 </footer>
@@ -52,7 +60,7 @@ const year = new Date().getFullYear();
   }
   .footer__grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
     gap: 48px;
     padding-bottom: 56px;
   }
