@@ -1,16 +1,4 @@
 ---
-const blocks = [
-  {
-    num: '01',
-    title: 'индивидуальный фокус',
-    body: 'в начале курса строим твой фокус — у каждого ученика свои задачи и стартовая точка, поэтому путь у каждого свой. ты получаешь систему, которая работает именно для твоих целей',
-  },
-  {
-    num: '02',
-    title: 'два вектора роста',
-    body: 'продвижение и прокачка видеографии — два направления роста. ты сама выбираешь акцент: фокус на одном или работа в обоих сразу',
-  },
-];
 ---
 
 <section id="approach" class="approach section">
@@ -20,72 +8,25 @@ const blocks = [
       обучение строится <span class="approach__accent">под твои задачи</span>
     </h2>
 
-    <div class="approach__grid">
-      {blocks.map((b, i) => (
-        <article class="approach__card reveal" style={`transition-delay: ${i * 80}ms`}>
-          <p class="approach__num">{b.num}</p>
-          <h3 class="approach__title">{b.title}</h3>
-          <p class="approach__body">{b.body}</p>
-        </article>
-      ))}
-    </div>
+    <p class="approach__lead reveal">
+      продвижение и прокачка видеографии — два направления роста. ты сама выбираешь акцент: фокус на одном или работа в обоих сразу
+    </p>
   </div>
 </section>
 
 <style>
   .approach .h-1 {
     margin-top: 12px;
-    margin-bottom: 64px;
+    margin-bottom: 32px;
     max-width: 18ch;
   }
   .approach__accent {
     color: var(--pink-deep);
   }
-  .approach__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  .approach__card {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 40px 36px;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-  }
-  .approach__num {
-    font-family: var(--font-sans);
-    font-size: 14px;
-    font-weight: 500;
+  .approach__lead {
+    font-size: clamp(18px, 1.6vw, 24px);
+    line-height: 1.5;
     color: var(--ink-soft);
-    letter-spacing: 0;
-  }
-  .approach__title {
-    font-family: var(--font-sans);
-    font-size: clamp(22px, 2.2vw, 32px);
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.02em;
-    text-transform: lowercase;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--line);
-  }
-  .approach__body {
-    font-size: clamp(14px, 1.05vw, 16px);
-    line-height: 1.55;
-    color: var(--ink-soft);
-  }
-
-  @media (max-width: 720px) {
-    .approach__grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .approach__card {
-      padding: 28px 24px;
-      gap: 16px;
-    }
+    max-width: 56ch;
   }
 </style>
