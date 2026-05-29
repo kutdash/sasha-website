@@ -4,7 +4,7 @@ export const SITE = {
   title: 'Путь видеографа — by Sasha Burtasova',
   description:
     'Двухмесячный курс по видеографии: с нуля до первых клиентов и стабильного дохода. Старт 6 июля 2026.',
-  url: 'https://sasha-burtasova.ru',
+  url: 'https://sashaburtasova.ru',
   startDate: '6 июля 2026',
   duration: '2 месяца',
   discountEndDate: '28 июня 2026',
