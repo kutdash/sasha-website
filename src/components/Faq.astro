@@ -1,0 +1,114 @@
+---
+import { FAQ } from '../config';
+---
+
+<section id="faq" class="faq section">
+  <div class="container">
+    <p class="h-eyebrow reveal">часто спрашивают</p>
+    <h2 class="h-1 reveal">
+      твои сомнения — <span class="faq__accent">это ок</span>
+    </h2>
+
+    <ul class="faq__list">
+      {FAQ.map((item, i) => (
+        <li class="faq__item reveal" style={`transition-delay: ${i * 50}ms`}>
+          <details class="faq__details">
+            <summary class="faq__summary">
+              <span class="faq__num">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="faq__question">{item.q}</h3>
+              <span class="faq__chevron" aria-hidden="true">+</span>
+            </summary>
+            <p class="faq__answer">{item.a}</p>
+          </details>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .faq .h-1 {
+    margin-top: 12px;
+    margin-bottom: 64px;
+    max-width: 18ch;
+  }
+  .faq__accent {
+    color: var(--pink-deep);
+  }
+
+  .faq__list {
+    list-style: none;
+    border-top: 1px solid var(--ink);
+  }
+  .faq__item {
+    border-bottom: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+  .faq__item:hover {
+    background: var(--pink-soft);
+  }
+  .faq__details {
+    width: 100%;
+  }
+  .faq__summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 32px;
+    align-items: baseline;
+    padding: 28px 12px;
+    transition: padding-left 0.3s ease;
+  }
+  .faq__summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq__item:hover .faq__summary {
+    padding-left: 24px;
+  }
+  .faq__num {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .faq__question {
+    font-family: var(--font-sans);
+    font-size: clamp(20px, 1.9vw, 28px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+  }
+  .faq__chevron {
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--ink-soft);
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+  .faq__details[open] .faq__chevron {
+    transform: rotate(45deg);
+    color: var(--pink-deep);
+  }
+  .faq__answer {
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 70ch;
+    padding: 0 12px 28px 124px;
+  }
+
+  @media (max-width: 720px) {
+    .faq__summary {
+      grid-template-columns: 56px 1fr auto;
+      gap: 16px;
+      padding: 22px 8px;
+    }
+    .faq__item:hover .faq__summary {
+      padding-left: 12px;
+    }
+    .faq__answer {
+      padding: 0 8px 22px 72px;
+    }
+  }
+</style>

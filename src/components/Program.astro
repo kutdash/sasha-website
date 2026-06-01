@@ -28,6 +28,10 @@ import Button from './Button.astro';
       ))}
     </ol>
 
+    <p class="program__note reveal">
+      * все уроки адаптивны под уровень — мой курс часто проходят пользователи DaVinci Resolve и других программ для монтажа
+    </p>
+
     <div class="program__cta reveal">
       <Button href="#pricing" variant="bracket" external={false}>выбрать тариф</Button>
     </div>
@@ -120,6 +124,14 @@ import Button from './Button.astro';
     color: var(--ink-soft);
     max-width: 60ch;
     padding: 0 12px 28px 124px;
+  }
+
+  .program__note {
+    margin-top: 24px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 60ch;
   }
 
   .program__cta {
