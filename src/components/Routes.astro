@@ -1,0 +1,171 @@
+---
+import { ROUTES } from '../config';
+---
+
+<section class="routes section">
+  <div class="container">
+    <p class="h-eyebrow reveal">мой подход</p>
+    <h2 class="h-1 reveal">
+      выбери <span class="routes__accent">свой маршрут</span>
+    </h2>
+
+    <div class="routes__grid">
+      {ROUTES.map((r, i) => (
+        <article class="routes__card reveal" style={`transition-delay: ${i * 80}ms`}>
+          <div class="routes__head">
+            <span class="routes__num">{r.number}</span>
+            <h3 class="routes__title">{r.title}</h3>
+          </div>
+
+          <ul class="routes__items">
+            {r.items.map((it) => (
+              <li class="routes__item">
+                <span class="routes__arrow" aria-hidden="true">→</span>
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="routes__result">
+            <span class="routes__result-label">результат</span>
+            <p class="routes__result-text">{r.result}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="routes__note reveal">
+      важно: для самого чёткого результата выполняй все задания и приходи на созвоны. даже если ты на высоком уровне, погружение в систему даст новые знания и опыт
+    </p>
+  </div>
+</section>
+
+<style>
+  .routes .h-1 {
+    margin-top: 12px;
+    margin-bottom: 64px;
+    max-width: 18ch;
+  }
+  .routes__accent {
+    color: var(--pink-deep);
+  }
+
+  .routes__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr auto;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .routes__card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    padding: 32px 28px 36px;
+    border-right: 1px solid var(--line);
+    transition: background 0.3s ease;
+  }
+  .routes__card:last-child {
+    border-right: none;
+  }
+  .routes__card:hover {
+    background: var(--pink-soft);
+  }
+
+  .routes__head {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .routes__num {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .routes__title {
+    font-family: var(--font-sans);
+    font-size: clamp(20px, 1.7vw, 26px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    max-width: 14ch;
+  }
+
+  .routes__items {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: start;
+  }
+  .routes__item {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .routes__arrow {
+    color: var(--pink-deep);
+    font-weight: 500;
+  }
+
+  .routes__result {
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-self: start;
+  }
+  .routes__result-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .routes__result-text {
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .routes__note {
+    margin-top: 24px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 70ch;
+  }
+
+  @media (max-width: 900px) {
+    .routes__grid {
+      display: block;
+    }
+    .routes__card {
+      display: flex;
+      flex-direction: column;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+      padding: 28px 16px;
+    }
+    .routes__card:last-child {
+      border-bottom: none;
+    }
+    .routes__title {
+      max-width: none;
+    }
+    .routes__result {
+      align-self: stretch;
+    }
+  }
+</style>
