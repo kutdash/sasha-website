@@ -260,12 +260,14 @@ export const SOCIALS = {
   email: 'alexanyarain@gmail.com',
 };
 
-// Payment / checkout links — replace with real checkout URLs (ЮKassa / Tinkoff / GetCourse / etc.)
+// Payment / checkout links
+const GETPLATINUM_CHECKOUT = 'https://sashaburtasova.getplatinum.ru/p/videographycourse';
+
 export const CHECKOUT = {
-  personal: SOCIALS.telegram, // SOLD — TG для записи в лист ожидания
-  group: SOCIALS.telegram, // TODO: replace with group tariff checkout URL
-  selfpaced: SOCIALS.telegram, // TODO: replace with self-paced tariff checkout URL
-  generic: SOCIALS.telegram, // CTA в hero и т.д.
+  personal: GETPLATINUM_CHECKOUT,
+  group: GETPLATINUM_CHECKOUT,
+  selfpaced: GETPLATINUM_CHECKOUT,
+  generic: SOCIALS.telegram, // CTA в hero "мне надо" — контакт с Сашей в TG
 };
 
 export const TARIFFS = [
@@ -273,7 +275,7 @@ export const TARIFFS = [
     id: 'selfpaced',
     name: 'Самостоятельный',
     tagline: 'Если хочешь пройти программу в своём темпе',
-    price: '38 900 ₽',
+    price: '39 900 ₽',
     priceUsd: '510 $',
     oldPrice: '49 900 ₽',
     seats: '20+ мест',
