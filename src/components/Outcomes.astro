@@ -41,7 +41,7 @@ import { OUTCOMES } from '../config';
   }
 
   .outcome {
-    grid-column: span 2;
+    grid-column: span 3;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -51,12 +51,8 @@ import { OUTCOMES } from '../config';
     border-radius: 6px;
   }
   .outcome--wide {
-    grid-column: span 3;
     background: var(--pink-soft);
     border-color: var(--pink-deep);
-  }
-  .outcomes__grid > .outcome:nth-child(2) {
-    grid-column: span 3;
   }
 
   .outcome__headline {
@@ -105,9 +101,7 @@ import { OUTCOMES } from '../config';
     .outcomes__grid {
       grid-template-columns: 1fr 1fr;
     }
-    .outcome,
-    .outcome--wide,
-    .outcomes__grid > .outcome:nth-child(2) {
+    .outcome {
       grid-column: auto;
     }
   }

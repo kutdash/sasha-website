@@ -1,5 +1,5 @@
 ---
-import { TARIFFS, SITE } from '../config';
+import { TARIFFS, SITE, SOCIALS } from '../config';
 ---
 
 <section id="pricing" class="pricing section">
@@ -67,8 +67,25 @@ import { TARIFFS, SITE } from '../config';
     </div>
 
     <p class="pricing__installments reveal muted">
-      доступна рассрочка на 6 и 12 месяцев · от 3 325 ₽/мес · все проценты беру на себя
+      доступна рассрочка на 6 и 12 месяцев · от 3 299 ₽/мес · все проценты беру на себя
     </p>
+
+    <div class="pricing__contact reveal">
+      <p class="pricing__contact-text">
+        если остались вопросы – пиши, всё решим 💗
+      </p>
+      <a
+        href={SOCIALS.telegram}
+        class="pricing__contact-btn"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        написать мне в тг
+        <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -287,6 +304,51 @@ import { TARIFFS, SITE } from '../config';
     margin-top: 32px;
     text-align: center;
     font-size: 14px;
+  }
+
+  .pricing__contact {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    text-align: center;
+  }
+  .pricing__contact-text {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.3vw, 19px);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .pricing__contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 38px;
+    background: var(--pink-soft);
+    color: var(--pink-deep);
+    border: 2px solid var(--pink-deep);
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: clamp(17px, 1.5vw, 20px);
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    will-change: transform;
+  }
+  .pricing__contact-btn:hover {
+    background: var(--pink-deep);
+    color: var(--bg);
+    transform: translateY(-2px);
+  }
+  .pricing__contact-btn svg {
+    transition: transform 0.25s ease;
+  }
+  .pricing__contact-btn:hover svg {
+    transform: translateX(4px);
   }
 
   @media (max-width: 960px) {
