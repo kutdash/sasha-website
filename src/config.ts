@@ -51,6 +51,37 @@ export const OUTCOMES = [
   },
 ];
 
+export const STUDENT_WORKS = [
+  {
+    id: 'leaf0',
+    type: 'video',
+    src: '/videos/students/leaf0.mp4',
+  },
+  {
+    id: 'gotovoe2',
+    type: 'video',
+    src: '/videos/students/gotovoe2.mp4',
+  },
+  {
+    id: 'DQv1CU5iEI9',
+    type: 'instagram',
+    cover: '/images/students/DQv1CU5iEI9-cover.jpg',
+    url: 'https://www.instagram.com/reel/DQv1CU5iEI9/',
+  },
+  {
+    id: 'DQZg3ksCP64',
+    type: 'instagram',
+    cover: '/images/students/DQZg3ksCP64-cover.jpg',
+    url: 'https://www.instagram.com/reel/DQZg3ksCP64/',
+  },
+  {
+    id: 'DTqMnPBjF-h',
+    type: 'instagram',
+    cover: '/images/students/DTqMnPBjF-h-cover.jpg',
+    url: 'https://www.instagram.com/reel/DTqMnPBjF-h/',
+  },
+];
+
 export const REELS = [
   {
     id: 'reel-1',
@@ -203,7 +234,7 @@ export const FAQ = [
   },
   {
     q: 'а если у меня мало времени?',
-    a: 'ты можешь проходить обучение в удобном темпе даже на групповом и личном тарифах. моё обучение строится на поддержке, а не на давлении. выбирай свой маршрут сама под свои задачи, а я буду рядом и подскажу, куда идти',
+    a: 'ты можешь проходить обучение в удобном темпе даже на групповом и личном тарифах. моё обучение строится на поддержке, а не на давлении. выбирай свой маршрут под свои задачи, а я буду рядом и подскажу, куда идти',
   },
   {
     q: 'можно ли купить отдельные блоки?',

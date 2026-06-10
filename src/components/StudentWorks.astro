@@ -1,0 +1,143 @@
+---
+import { STUDENT_WORKS } from '../config';
+---
+
+<section id="student-works" class="works section">
+  <div class="container">
+    <p class="h-eyebrow reveal">работы учеников</p>
+    <h2 class="h-1 reveal">
+      что снимают <span class="works__accent">мои ученики</span>
+    </h2>
+    <p class="works__lead reveal body-md">
+      fashion, свадьбы, backstage, beauty — каждый нашёл свой стиль и снимает то, что любит
+    </p>
+
+    <div class="works__grid">
+      {STUDENT_WORKS.map((w, i) => (
+        <>
+          {w.type === 'video' ? (
+            <div
+              class="work reveal"
+              style={`transition-delay: ${i * 80}ms`}
+            >
+              <video
+                class="work__video"
+                src={w.src}
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-hidden="true"
+              ></video>
+            </div>
+          ) : (
+            <a
+              href={w.url}
+              class="work reveal"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={`transition-delay: ${i * 80}ms`}
+            >
+              <img class="work__cover" src={w.cover} alt="Работа ученика" loading="lazy" />
+              <div class="work__overlay">
+                <span class="work__play" aria-hidden="true">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .works .h-1 {
+    margin-top: 12px;
+    margin-bottom: 24px;
+  }
+  .works__accent {
+    color: var(--pink-deep);
+  }
+  .works__lead {
+    max-width: 640px;
+    color: var(--ink-soft);
+    margin-bottom: 56px;
+  }
+
+  .works__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .work {
+    position: relative;
+    display: block;
+    flex: 0 1 calc(33.333% - 12px);
+    aspect-ratio: 9 / 16;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-soft);
+    transition: transform 0.3s ease;
+  }
+  .work:hover {
+    transform: translateY(-4px);
+  }
+
+  .work__video,
+  .work__cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .work:hover .work__cover {
+    transform: scale(1.04);
+  }
+
+  .work__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 50%);
+    pointer-events: none;
+  }
+  .work__play {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .work__play svg {
+    margin-left: 4px;
+  }
+  .work:hover .work__play {
+    background: var(--pink-deep);
+    color: var(--bg);
+    transform: scale(1.08);
+  }
+
+  @media (max-width: 960px) {
+    .work {
+      flex: 0 1 calc(50% - 8px);
+    }
+  }
+  @media (max-width: 480px) {
+    .work {
+      flex: 0 1 100%;
+    }
+  }
+</style>
