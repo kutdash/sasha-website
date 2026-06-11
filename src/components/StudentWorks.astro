@@ -83,14 +83,27 @@ import { STUDENT_WORKS } from '../config';
   .works__strip {
     display: flex;
     gap: 12px;
-    padding: 0 clamp(20px, 5vw, 64px);
+    padding: 0 clamp(20px, 5vw, 64px) 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    cursor: grab;
+  }
+  .works__strip:active {
+    cursor: grabbing;
   }
   .works__strip::-webkit-scrollbar {
-    display: none;
+    height: 6px;
+  }
+  .works__strip::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .works__strip::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 999px;
+  }
+  .works__strip::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-soft);
   }
 
   .work {
@@ -191,9 +204,14 @@ import { STUDENT_WORKS } from '../config';
   cards.forEach((card) => {
     const video = card.querySelector('video');
     if (!video) return;
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      // ignore click after drag scroll
+      if (card.dataset.justDragged === '1') {
+        card.dataset.justDragged = '0';
+        e.preventDefault();
+        return;
+      }
       if (video.muted) {
-        // mute all other videos first
         cards.forEach((other) => {
           if (other === card) return;
           const otherVideo = other.querySelector('video');
@@ -214,4 +232,34 @@ import { STUDENT_WORKS } from '../config';
       }
     });
   });
+
+  // Drag-to-scroll for mouse users
+  const strip = document.querySelector<HTMLDivElement>('.works__strip');
+  if (strip) {
+    let isDown = false;
+    let startX = 0;
+    let scrollLeftStart = 0;
+    let moved = false;
+    strip.addEventListener('mousedown', (e) => {
+      isDown = true;
+      moved = false;
+      startX = e.pageX - strip.offsetLeft;
+      scrollLeftStart = strip.scrollLeft;
+    });
+    strip.addEventListener('mouseleave', () => { isDown = false; });
+    strip.addEventListener('mouseup', (e) => {
+      isDown = false;
+      if (moved) {
+        const target = (e.target as HTMLElement)?.closest('[data-video-card]') as HTMLElement | null;
+        if (target) target.dataset.justDragged = '1';
+      }
+    });
+    strip.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - strip.offsetLeft;
+      const walk = x - startX;
+      if (Math.abs(walk) > 4) moved = true;
+      strip.scrollLeft = scrollLeftStart - walk;
+    });
+  }
 </script>
