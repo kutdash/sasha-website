@@ -53,6 +53,16 @@ export const OUTCOMES = [
 
 export const STUDENT_WORKS = [
   {
+    id: 'student-1',
+    type: 'video',
+    src: '/videos/students/student-1.mp4',
+  },
+  {
+    id: 'student-2',
+    type: 'video',
+    src: '/videos/students/student-2.mp4',
+  },
+  {
     id: 'leaf0',
     type: 'video',
     src: '/videos/students/leaf0.mp4',
@@ -63,27 +73,15 @@ export const STUDENT_WORKS = [
     src: '/videos/students/gotovoe2.mp4',
   },
   {
+    id: 'student-5',
+    type: 'video',
+    src: '/videos/students/student-5.mp4',
+  },
+  {
     id: 'DQv1CU5iEI9',
     type: 'instagram',
     cover: '/images/students/DQv1CU5iEI9-cover.jpg',
     url: 'https://www.instagram.com/reel/DQv1CU5iEI9/',
-  },
-  {
-    id: 'DQZg3ksCP64',
-    type: 'instagram',
-    cover: '/images/students/DQZg3ksCP64-cover.jpg',
-    url: 'https://www.instagram.com/reel/DQZg3ksCP64/',
-  },
-  {
-    id: 'DTqMnPBjF-h',
-    type: 'instagram',
-    cover: '/images/students/DTqMnPBjF-h-cover.jpg',
-    url: 'https://www.instagram.com/reel/DTqMnPBjF-h/',
-  },
-  {
-    id: 'work6',
-    type: 'video',
-    src: '/videos/students/work6.mp4',
   },
 ];
 

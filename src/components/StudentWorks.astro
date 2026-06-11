@@ -11,51 +11,62 @@ import { STUDENT_WORKS } from '../config';
     <p class="works__lead reveal body-md">
       fashion, свадьбы, backstage, beauty — каждый нашёл свой стиль и снимает то, что любит
     </p>
+  </div>
 
-    <div class="works__grid">
-      {STUDENT_WORKS.map((w, i) => (
-        <>
-          {w.type === 'video' ? (
-            <div
-              class="work reveal"
-              style={`transition-delay: ${i * 80}ms`}
-            >
-              <video
-                class="work__video"
-                src={w.src}
-                autoplay
-                muted
-                loop
-                playsinline
-                preload="metadata"
-                aria-hidden="true"
-              ></video>
-            </div>
-          ) : (
-            <a
-              href={w.url}
-              class="work reveal"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={`transition-delay: ${i * 80}ms`}
-            >
-              <img class="work__cover" src={w.cover} alt="Работа ученика" loading="lazy" />
-              <div class="work__overlay">
-                <span class="work__play" aria-hidden="true">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </span>
-              </div>
-            </a>
-          )}
-        </>
-      ))}
-    </div>
+  <div class="works__strip">
+    {STUDENT_WORKS.map((w, i) => (
+      w.type === 'video' ? (
+        <button
+          type="button"
+          class="work reveal"
+          data-video-card
+          aria-label="Включить звук"
+          style={`transition-delay: ${i * 60}ms`}
+        >
+          <video
+            class="work__video"
+            src={w.src}
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-hidden="true"
+          ></video>
+          <span class="work__sound" aria-hidden="true">
+            <svg class="work__sound-icon work__sound-icon--off" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.17v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+            </svg>
+            <svg class="work__sound-icon work__sound-icon--on" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+          </span>
+        </button>
+      ) : (
+        <a
+          href={w.url}
+          class="work reveal"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Открыть в Instagram"
+          style={`transition-delay: ${i * 60}ms`}
+        >
+          <img class="work__cover" src={w.cover} alt="Работа ученика" loading="lazy" />
+          <span class="work__play" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+        </a>
+      )
+    ))}
   </div>
 </section>
 
 <style>
+  .works {
+    overflow: hidden;
+  }
   .works .h-1 {
     margin-top: 12px;
     margin-bottom: 24px;
@@ -66,24 +77,34 @@ import { STUDENT_WORKS } from '../config';
   .works__lead {
     max-width: 640px;
     color: var(--ink-soft);
-    margin-bottom: 56px;
+    margin-bottom: 48px;
   }
 
-  .works__grid {
+  .works__strip {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
+    gap: 12px;
+    padding: 0 clamp(20px, 5vw, 64px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .works__strip::-webkit-scrollbar {
+    display: none;
   }
 
   .work {
     position: relative;
-    display: block;
-    flex: 0 1 calc(33.333% - 12px);
+    flex: 0 0 calc((100% - 32px) / 3);
+    min-width: 280px;
     aspect-ratio: 9 / 16;
     border-radius: 6px;
     overflow: hidden;
     background: var(--bg-soft);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    scroll-snap-align: start;
     transition: transform 0.3s ease;
   }
   .work:hover {
@@ -96,48 +117,101 @@ import { STUDENT_WORKS } from '../config';
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
-  }
-  .work:hover .work__cover {
-    transform: scale(1.04);
   }
 
-  .work__overlay {
+  .work__sound {
     position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 50%);
-    pointer-events: none;
-  }
-  .work__play {
-    width: 64px;
-    height: 64px;
+    bottom: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(8px);
+    transition: background 0.25s ease;
+  }
+  .work:hover .work__sound {
+    background: rgba(0, 0, 0, 0.75);
+  }
+  .work__sound-icon {
+    grid-area: 1 / 1;
+    transition: opacity 0.2s ease;
+  }
+  .work__sound-icon--on {
+    opacity: 0;
+  }
+  .work.is-unmuted .work__sound-icon--off {
+    opacity: 0;
+  }
+  .work.is-unmuted .work__sound-icon--on {
+    opacity: 1;
+  }
+  .work.is-unmuted .work__sound {
+    background: var(--pink-deep);
+  }
+
+  .work__play {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
     color: var(--ink);
     display: grid;
     place-items: center;
-    transition: background 0.25s ease, transform 0.25s ease;
+    transition: background 0.25s ease, color 0.25s ease;
   }
   .work__play svg {
-    margin-left: 4px;
+    margin-left: 2px;
   }
   .work:hover .work__play {
     background: var(--pink-deep);
     color: var(--bg);
-    transform: scale(1.08);
   }
 
-  @media (max-width: 960px) {
-    .work {
-      flex: 0 1 calc(50% - 8px);
+  @media (max-width: 720px) {
+    .works__strip {
+      padding: 0 16px;
+      gap: 8px;
     }
-  }
-  @media (max-width: 480px) {
     .work {
-      flex: 0 1 100%;
+      min-width: 140px;
+      flex: 0 0 38vw;
     }
   }
 </style>
+
+<script>
+  const cards = document.querySelectorAll<HTMLButtonElement>('[data-video-card]');
+  cards.forEach((card) => {
+    const video = card.querySelector('video');
+    if (!video) return;
+    card.addEventListener('click', () => {
+      if (video.muted) {
+        // mute all other videos first
+        cards.forEach((other) => {
+          if (other === card) return;
+          const otherVideo = other.querySelector('video');
+          if (otherVideo && !otherVideo.muted) {
+            otherVideo.muted = true;
+            other.classList.remove('is-unmuted');
+            other.setAttribute('aria-label', 'Включить звук');
+          }
+        });
+        video.muted = false;
+        video.volume = 1;
+        card.classList.add('is-unmuted');
+        card.setAttribute('aria-label', 'Выключить звук');
+      } else {
+        video.muted = true;
+        card.classList.remove('is-unmuted');
+        card.setAttribute('aria-label', 'Включить звук');
+      }
+    });
+  });
+</script>
