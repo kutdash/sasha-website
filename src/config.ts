@@ -80,6 +80,11 @@ export const STUDENT_WORKS = [
     cover: '/images/students/DTqMnPBjF-h-cover.jpg',
     url: 'https://www.instagram.com/reel/DTqMnPBjF-h/',
   },
+  {
+    id: 'work6',
+    type: 'video',
+    src: '/videos/students/work6.mp4',
+  },
 ];
 
 export const REELS = [
