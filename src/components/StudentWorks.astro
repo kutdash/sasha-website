@@ -233,6 +233,22 @@ import { STUDENT_WORKS } from '../config';
     });
   });
 
+  // IntersectionObserver — pause videos that aren't visible to save CPU/bandwidth
+  const allVideos = document.querySelectorAll<HTMLVideoElement>('[data-video-card] video');
+  if ('IntersectionObserver' in window && allVideos.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+    allVideos.forEach((v) => io.observe(v));
+  }
+
   // Drag-to-scroll for mouse users
   const strip = document.querySelector<HTMLDivElement>('.works__strip');
   if (strip) {

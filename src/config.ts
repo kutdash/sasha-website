@@ -78,10 +78,24 @@ export const STUDENT_WORKS = [
     src: '/videos/students/student-5.mp4',
   },
   {
-    id: 'DQv1CU5iEI9',
-    type: 'instagram',
-    cover: '/images/students/DQv1CU5iEI9-cover.jpg',
-    url: 'https://www.instagram.com/reel/DQv1CU5iEI9/',
+    id: 'student-6',
+    type: 'video',
+    src: '/videos/students/student-6.mp4',
+  },
+  {
+    id: 'student-7',
+    type: 'video',
+    src: '/videos/students/student-7.mp4',
+  },
+  {
+    id: 'student-8',
+    type: 'video',
+    src: '/videos/students/student-8.mp4',
+  },
+  {
+    id: 'student-9',
+    type: 'video',
+    src: '/videos/students/student-9.mp4',
   },
 ];
 
