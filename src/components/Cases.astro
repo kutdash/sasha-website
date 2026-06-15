@@ -53,6 +53,10 @@ const handleSlug = (handle: string) => handle.replace(/^@/, '');
         </article>
       ))}
     </div>
+
+    <p class="cases__disclaimer reveal">
+      истории учеников. результаты индивидуальны и зависят от твоей работы, ниши и исходных данных.
+    </p>
   </div>
 </section>
 
@@ -63,6 +67,13 @@ const handleSlug = (handle: string) => handle.replace(/^@/, '');
   }
   .cases__accent {
     color: var(--pink-deep);
+  }
+  .cases__disclaimer {
+    margin-top: 40px;
+    max-width: 70ch;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink-soft);
   }
 
   .cases__grid {
