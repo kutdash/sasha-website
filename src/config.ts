@@ -338,7 +338,7 @@ export const TARIFFS = [
     price: '39 900 ₽',
     priceUsd: '510 $',
     oldPrice: '49 900 ₽',
-    seats: '20+ мест',
+    seats: '12 из 20 мест',
     sold: false,
     features: [
       'Доступ к материалам на 3 месяца',
@@ -359,7 +359,7 @@ export const TARIFFS = [
     price: '99 900 ₽',
     priceUsd: '1 300 $',
     oldPrice: '119 900 ₽',
-    seats: '15 мест',
+    seats: '6 из 15 мест',
     sold: false,
     highlighted: true,
     features: [
@@ -383,7 +383,7 @@ export const TARIFFS = [
     price: '169 900 ₽',
     priceUsd: '2 250 $',
     oldPrice: '199 900 ₽',
-    seats: '8 мест',
+    seats: '3 из 8 мест',
     sold: false,
     chip: 'максимум поддержки',
     features: [
