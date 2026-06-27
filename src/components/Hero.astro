@@ -33,6 +33,15 @@ import { CHECKOUT, SITE } from '../config';
 
       <div class="hero__cta">
         <Button href="#pricing" variant="bracket" external={false}>выбрать тариф</Button>
+        <div class="hero__timer" data-deadline="2026-06-28T23:59:59+03:00" aria-label="До повышения цены">
+          <p class="hero__timer-label">до повышения цены</p>
+          <div class="hero__timer-row">
+            <span class="hero__timer-cell"><span class="hero__timer-num" data-unit="days">--</span><span class="hero__timer-unit">дн</span></span>
+            <span class="hero__timer-cell"><span class="hero__timer-num" data-unit="hours">--</span><span class="hero__timer-unit">ч</span></span>
+            <span class="hero__timer-cell"><span class="hero__timer-num" data-unit="minutes">--</span><span class="hero__timer-unit">мин</span></span>
+            <span class="hero__timer-cell"><span class="hero__timer-num" data-unit="seconds">--</span><span class="hero__timer-unit">сек</span></span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -121,7 +130,50 @@ import { CHECKOUT, SITE } from '../config';
   .hero__cta {
     display: flex;
     flex-wrap: wrap;
-    gap: 32px;
+    align-items: center;
+    gap: 28px;
+  }
+  .hero__timer {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding-left: 28px;
+    border-left: 1px solid var(--line);
+  }
+  .hero__timer-label {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: -0.01em;
+  }
+  .hero__timer-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .hero__timer-cell {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+  .hero__timer-num {
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .hero__timer-unit {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+  .hero__timer.is-expired {
+    display: none;
   }
 
   /* Lookbook collage — 3 equal vertical (9:16) video tiles */
@@ -174,5 +226,43 @@ import { CHECKOUT, SITE } from '../config';
       grid-template-columns: 1fr;
       gap: 20px;
     }
+    .hero__cta {
+      gap: 20px;
+    }
+    .hero__timer {
+      padding-left: 0;
+      border-left: none;
+    }
   }
 </style>
+
+<script>
+  const timer = document.querySelector('.hero__timer') as HTMLElement | null;
+  if (timer) {
+    const deadline = new Date(timer.dataset.deadline || '').getTime();
+    const nums: Record<string, HTMLElement | null> = {
+      days: timer.querySelector('[data-unit="days"]'),
+      hours: timer.querySelector('[data-unit="hours"]'),
+      minutes: timer.querySelector('[data-unit="minutes"]'),
+      seconds: timer.querySelector('[data-unit="seconds"]'),
+    };
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const tick = () => {
+      const diff = deadline - Date.now();
+      if (diff <= 0) {
+        timer.classList.add('is-expired');
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+      if (nums.days) nums.days.textContent = String(days);
+      if (nums.hours) nums.hours.textContent = pad(hours);
+      if (nums.minutes) nums.minutes.textContent = pad(minutes);
+      if (nums.seconds) nums.seconds.textContent = pad(seconds);
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+</script>

@@ -9,8 +9,27 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
       выбери свой <span class="pricing__accent">формат</span>
     </h2>
     <p class="pricing__intro reveal body-md">
-      специальные цены действуют до <span class="underline-pink">{SITE.discountEndDate}</span>
+      специальные цены действуют до <span class="underline-pink">{SITE.discountEndDate}</span> включительно
     </p>
+
+    <div class="pricing__timer reveal" data-deadline="2026-06-28T23:59:59+03:00" aria-label="До повышения цены">
+      <p class="pricing__timer-label">до повышения цены</p>
+      <div class="pricing__timer-row">
+        <span class="pricing__timer-num" data-unit="days">--</span>
+        <span class="pricing__timer-colon">:</span>
+        <span class="pricing__timer-num" data-unit="hours">--</span>
+        <span class="pricing__timer-colon">:</span>
+        <span class="pricing__timer-num" data-unit="minutes">--</span>
+        <span class="pricing__timer-colon">:</span>
+        <span class="pricing__timer-num" data-unit="seconds">--</span>
+      </div>
+      <div class="pricing__timer-units">
+        <span>дни</span>
+        <span>часы</span>
+        <span>минуты</span>
+        <span>секунды</span>
+      </div>
+    </div>
 
     <p class="pricing__callout reveal">
       все тарифы включают личную обратную связь от саши 🔥
@@ -100,6 +119,68 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
   .pricing__intro {
     margin-bottom: 16px;
     color: var(--ink-soft);
+  }
+
+  .pricing__timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 44px;
+    padding: 8px 0;
+    text-align: center;
+  }
+  .pricing__timer-label {
+    font-family: var(--font-sans);
+    font-size: clamp(16px, 1.3vw, 19px);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .pricing__timer-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    align-items: baseline;
+    gap: 10px;
+    max-width: 560px;
+    width: 100%;
+  }
+  .pricing__timer-num {
+    font-family: var(--font-sans);
+    font-size: clamp(44px, 6vw, 72px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+  .pricing__timer-colon {
+    font-family: var(--font-sans);
+    font-size: clamp(32px, 4.5vw, 52px);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--ink-soft);
+    opacity: 0.4;
+  }
+  .pricing__timer-units {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    max-width: 560px;
+    width: 100%;
+    margin-top: 2px;
+  }
+  .pricing__timer-units span {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+  .pricing__timer.is-expired {
+    display: none;
   }
 
   .pricing__callout {
@@ -355,5 +436,48 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
     .pricing__grid {
       grid-template-columns: 1fr;
     }
+    .pricing__timer-row {
+      gap: 6px;
+    }
+    .pricing__timer-num {
+      font-size: 42px;
+    }
+    .pricing__timer-colon {
+      font-size: 30px;
+    }
+    .pricing__timer-units span {
+      font-size: 11px;
+    }
   }
 </style>
+
+<script>
+  const timer = document.querySelector('.pricing__timer') as HTMLElement | null;
+  if (timer) {
+    const deadline = new Date(timer.dataset.deadline || '').getTime();
+    const nums: Record<string, HTMLElement | null> = {
+      days: timer.querySelector('[data-unit="days"]'),
+      hours: timer.querySelector('[data-unit="hours"]'),
+      minutes: timer.querySelector('[data-unit="minutes"]'),
+      seconds: timer.querySelector('[data-unit="seconds"]'),
+    };
+    const pad = (n: number) => String(n).padStart(2, '0');
+    const tick = () => {
+      const diff = deadline - Date.now();
+      if (diff <= 0) {
+        timer.classList.add('is-expired');
+        return;
+      }
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const minutes = Math.floor((diff % 3600000) / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+      if (nums.days) nums.days.textContent = String(days);
+      if (nums.hours) nums.hours.textContent = pad(hours);
+      if (nums.minutes) nums.minutes.textContent = pad(minutes);
+      if (nums.seconds) nums.seconds.textContent = pad(seconds);
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+</script>
