@@ -8,6 +8,7 @@ export const SITE = {
   startDate: '6 июля 2026',
   duration: '2 месяца',
   discountEndDate: '28 июня 2026',
+  discountDeadlineIso: '2026-06-28T23:59:59+03:00',
 };
 
 export const OUTCOMES = [
@@ -338,6 +339,7 @@ export const TARIFFS = [
     price: '39 900 ₽',
     priceUsd: '510 $',
     oldPrice: '44 900 ₽',
+    oldPriceUsd: '575 $',
     seats: '5 из 20 мест',
     sold: false,
     features: [
@@ -351,6 +353,7 @@ export const TARIFFS = [
     note: 'В тариф не входят воркшопы, созвоны, групповые разборы и сопровождение',
     checkout: CHECKOUT.selfpaced,
     cta: 'Купить от 3 299 ₽/мес',
+    ctaAfter: 'Купить от 3 742 ₽/мес',
   },
   {
     id: 'group',
@@ -359,6 +362,7 @@ export const TARIFFS = [
     price: '99 900 ₽',
     priceUsd: '1 300 $',
     oldPrice: '109 900 ₽',
+    oldPriceUsd: '1 430 $',
     seats: '3 из 15 мест',
     sold: false,
     highlighted: true,
@@ -375,6 +379,7 @@ export const TARIFFS = [
     ],
     checkout: CHECKOUT.group,
     cta: 'Купить от 8 299 ₽/мес',
+    ctaAfter: 'Купить от 9 158 ₽/мес',
   },
   {
     id: 'personal',
@@ -383,6 +388,7 @@ export const TARIFFS = [
     price: '169 900 ₽',
     priceUsd: '2 250 $',
     oldPrice: '179 900 ₽',
+    oldPriceUsd: '2 400 $',
     seats: '2 из 8 мест',
     sold: false,
     chip: 'максимум поддержки',
@@ -401,5 +407,6 @@ export const TARIFFS = [
     ],
     checkout: CHECKOUT.personal,
     cta: 'Купить от 14 099 ₽/мес',
+    ctaAfter: 'Купить от 14 992 ₽/мес',
   },
 ];
