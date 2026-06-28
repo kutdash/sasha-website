@@ -337,8 +337,8 @@ export const TARIFFS = [
     tagline: 'Если хочешь пройти программу в своём темпе',
     price: '39 900 ₽',
     priceUsd: '510 $',
-    oldPrice: '49 900 ₽',
-    seats: '12 из 20 мест',
+    oldPrice: '44 900 ₽',
+    seats: '5 из 20 мест',
     sold: false,
     features: [
       'Доступ к материалам на 3 месяца',
@@ -358,8 +358,8 @@ export const TARIFFS = [
     tagline: 'Если важен результат, обратная связь и движение в группе',
     price: '99 900 ₽',
     priceUsd: '1 300 $',
-    oldPrice: '119 900 ₽',
-    seats: '6 из 15 мест',
+    oldPrice: '109 900 ₽',
+    seats: '3 из 15 мест',
     sold: false,
     highlighted: true,
     features: [
@@ -382,8 +382,8 @@ export const TARIFFS = [
     tagline: 'Если нужна опора и быстрый результат',
     price: '169 900 ₽',
     priceUsd: '2 250 $',
-    oldPrice: '199 900 ₽',
-    seats: '3 из 8 мест',
+    oldPrice: '179 900 ₽',
+    seats: '2 из 8 мест',
     sold: false,
     chip: 'максимум поддержки',
     features: [
