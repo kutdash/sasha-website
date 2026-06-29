@@ -338,8 +338,6 @@ export const TARIFFS = [
     tagline: 'Если хочешь пройти программу в своём темпе',
     price: '39 900 ₽',
     priceUsd: '510 $',
-    oldPrice: '44 900 ₽',
-    oldPriceUsd: '575 $',
     seats: '5 из 20 мест',
     sold: false,
     features: [
@@ -353,7 +351,6 @@ export const TARIFFS = [
     note: 'В тариф не входят воркшопы, созвоны, групповые разборы и сопровождение',
     checkout: CHECKOUT.selfpaced,
     cta: 'Купить от 3 299 ₽/мес',
-    ctaAfter: 'Купить от 3 742 ₽/мес',
   },
   {
     id: 'group',
