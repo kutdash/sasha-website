@@ -9,6 +9,7 @@ export const SITE = {
   duration: '2 месяца',
   discountEndDate: '28 июня 2026',
   discountDeadlineIso: '2026-06-28T23:59:59+03:00',
+  enrollmentEndDate: '5 июля 2026',
 };
 
 export const OUTCOMES = [
@@ -360,7 +361,7 @@ export const TARIFFS = [
     priceUsd: '1 300 $',
     oldPrice: '109 900 ₽',
     oldPriceUsd: '1 430 $',
-    seats: '3 из 15 мест',
+    seats: '2 из 15 мест',
     sold: false,
     highlighted: true,
     features: [

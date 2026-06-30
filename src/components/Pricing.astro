@@ -36,6 +36,9 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
     <p class="pricing__intro reveal body-md" data-pre-deadline>
       специальные цены действуют до <span class="underline-pink">{SITE.discountEndDate}</span> включительно
     </p>
+    <p class="pricing__intro reveal body-md">
+      набор открыт до <span class="underline-pink">{SITE.enrollmentEndDate}</span>
+    </p>
 
     <div class="pricing__timer reveal" data-deadline={SITE.discountDeadlineIso} aria-label="До повышения цены">
       <p class="pricing__timer-label">до повышения цены</p>
