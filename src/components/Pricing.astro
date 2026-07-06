@@ -27,7 +27,7 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
   })();
 </script>
 
-<section id="pricing" class="pricing section">
+<section id="pricing" class="pricing section" data-ym-goal-view="pricing_view">
   <div class="container">
     <p class="h-eyebrow reveal">тарифы</p>
     <h2 class="h-1 reveal">
@@ -110,6 +110,7 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
             target={t.checkout.startsWith('http') ? '_blank' : undefined}
             rel={t.checkout.startsWith('http') ? 'noopener noreferrer' : undefined}
             data-cta-block
+            data-ym-goal={`tariff_buy_${t.id}`}
           >
             <span data-state="before">{t.cta.toLowerCase()}</span>
             <span data-state="after" hidden>{(t.ctaAfter || t.cta).toLowerCase()}</span>
@@ -134,6 +135,7 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
         class="pricing__contact-btn"
         target="_blank"
         rel="noopener noreferrer"
+        data-ym-goal="telegram_contact_click"
       >
         написать мне в тг
         <svg width="20" height="20" viewBox="0 0 18 18" fill="none" aria-hidden="true">

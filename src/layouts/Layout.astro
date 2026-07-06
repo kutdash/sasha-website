@@ -68,5 +68,55 @@ const ymCounterId = import.meta.env.PUBLIC_YM_COUNTER_ID;
       );
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
+
+    <script is:inline>
+      // Yandex.Metrika goal tracking
+      (function () {
+        var counter = null;
+        function getCounter() {
+          if (counter !== null) return counter;
+          if (typeof window.ym !== 'function' || !window.ym.a) return null;
+          for (var i = 0; i < window.ym.a.length; i++) {
+            if (window.ym.a[i] && window.ym.a[i][1] === 'init') {
+              counter = window.ym.a[i][0];
+              return counter;
+            }
+          }
+          return null;
+        }
+        function reachGoal(goal) {
+          var id = getCounter();
+          if (id != null && typeof window.ym === 'function') {
+            window.ym(id, 'reachGoal', goal);
+          }
+        }
+
+        // Fire on click for anything with data-ym-goal
+        document.addEventListener('click', function (e) {
+          var target = e.target;
+          while (target && target !== document.body) {
+            if (target.dataset && target.dataset.ymGoal) {
+              reachGoal(target.dataset.ymGoal);
+              return;
+            }
+            target = target.parentElement;
+          }
+        }, true);
+
+        // Fire once when an element with data-ym-goal-view scrolls into view
+        var viewObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var goal = entry.target.dataset.ymGoalView;
+              if (goal) reachGoal(goal);
+              viewObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.35 });
+        document.querySelectorAll('[data-ym-goal-view]').forEach(function (el) {
+          viewObserver.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>
