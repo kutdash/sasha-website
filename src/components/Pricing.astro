@@ -36,9 +36,6 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
     <p class="pricing__intro reveal body-md" data-pre-deadline>
       специальные цены действуют до <span class="underline-pink">{SITE.discountEndDate}</span> включительно
     </p>
-    <p class="pricing__intro reveal body-md">
-      набор открыт до <span class="underline-pink">{SITE.enrollmentEndDate}</span>
-    </p>
 
     <div class="pricing__timer reveal" data-deadline={SITE.discountDeadlineIso} aria-label="До повышения цены">
       <p class="pricing__timer-label">до повышения цены</p>
@@ -78,23 +75,28 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
             <div class="tariff__top">
               <h3 class="tariff__name">{t.name.toLowerCase()}</h3>
               {t.chip && !t.sold && <span class="tariff__chip">{t.chip}</span>}
-              {t.sold && <span class="tariff__chip tariff__chip--sold">sold out</span>}
             </div>
-            {t.seats && <p class="tariff__seats">{t.seats}</p>}
+            {t.seats && !t.sold && <p class="tariff__seats">{t.seats}</p>}
             <p class="tariff__tagline">{t.tagline.toLowerCase()}</p>
           </header>
 
-          <div class="tariff__price" data-price-block>
-            <div class="tariff__price-state" data-state="before">
-              {t.oldPrice && <span class="tariff__old">{t.oldPrice}</span>}
-              <span class="tariff__now">{t.price}</span>
-              <span class="tariff__usd">/ {t.priceUsd}</span>
+          {t.sold ? (
+            <div class="tariff__price tariff__price--sold">
+              <span class="tariff__sold-label">sold out</span>
             </div>
-            <div class="tariff__price-state" data-state="after" hidden>
-              <span class="tariff__now">{t.oldPrice || t.price}</span>
-              <span class="tariff__usd">/ {t.oldPriceUsd || t.priceUsd}</span>
+          ) : (
+            <div class="tariff__price" data-price-block>
+              <div class="tariff__price-state" data-state="before">
+                {t.oldPrice && <span class="tariff__old">{t.oldPrice}</span>}
+                <span class="tariff__now">{t.price}</span>
+                <span class="tariff__usd">/ {t.priceUsd}</span>
+              </div>
+              <div class="tariff__price-state" data-state="after" hidden>
+                <span class="tariff__now">{t.oldPrice || t.price}</span>
+                <span class="tariff__usd">/ {t.oldPriceUsd || t.priceUsd}</span>
+              </div>
             </div>
-          </div>
+          )}
 
           <ul class="tariff__features">
             {t.features.map((f) => (
@@ -104,20 +106,26 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
 
           {t.note && <p class="tariff__note">* {t.note.toLowerCase()}</p>}
 
-          <a
-            href={t.checkout}
-            class:list={['tariff__btn', t.highlighted && 'tariff__btn--hl']}
-            target={t.checkout.startsWith('http') ? '_blank' : undefined}
-            rel={t.checkout.startsWith('http') ? 'noopener noreferrer' : undefined}
-            data-cta-block
-            data-ym-goal={`tariff_buy_${t.id}`}
-          >
-            <span data-state="before">{t.cta.toLowerCase()}</span>
-            <span data-state="after" hidden>{(t.ctaAfter || t.cta).toLowerCase()}</span>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-              <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </a>
+          {t.sold ? (
+            <span class="tariff__btn tariff__btn--sold" aria-disabled="true">
+              продано
+            </span>
+          ) : (
+            <a
+              href={t.checkout}
+              class:list={['tariff__btn', t.highlighted && 'tariff__btn--hl']}
+              target={t.checkout.startsWith('http') ? '_blank' : undefined}
+              rel={t.checkout.startsWith('http') ? 'noopener noreferrer' : undefined}
+              data-cta-block
+              data-ym-goal={`tariff_buy_${t.id}`}
+            >
+              <span data-state="before">{t.cta.toLowerCase()}</span>
+              <span data-state="after" hidden>{(t.ctaAfter || t.cta).toLowerCase()}</span>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          )}
         </article>
       ))}
     </div>
@@ -357,6 +365,18 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
     font-size: 14px;
     color: var(--ink-soft);
   }
+  .tariff__price--sold {
+    align-items: center;
+    min-height: 44px;
+  }
+  .tariff__sold-label {
+    font-family: var(--font-sans);
+    font-size: clamp(24px, 2.2vw, 30px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
 
   .tariff__features {
     display: flex;
@@ -417,6 +437,21 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
   }
   .tariff__btn--hl:hover {
     background: var(--pink-deeper);
+  }
+  .tariff__btn--sold {
+    justify-content: center;
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    cursor: not-allowed;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .tariff__btn--sold:hover {
+    background: transparent;
+    transform: none;
   }
 
   .pricing__installments {
