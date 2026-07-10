@@ -383,8 +383,6 @@ export const TARIFFS = [
     tagline: 'Если нужна опора и быстрый результат',
     price: '169 900 ₽',
     priceUsd: '2 250 $',
-    oldPrice: '179 900 ₽',
-    oldPriceUsd: '2 400 $',
     seats: '2 из 8 мест',
     sold: true,
     chip: 'максимум поддержки',
