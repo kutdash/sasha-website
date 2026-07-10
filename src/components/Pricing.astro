@@ -75,28 +75,23 @@ import { TARIFFS, SITE, SOCIALS } from '../config';
             <div class="tariff__top">
               <h3 class="tariff__name">{t.name.toLowerCase()}</h3>
               {t.chip && !t.sold && <span class="tariff__chip">{t.chip}</span>}
+              {t.sold && <span class="tariff__chip tariff__chip--sold">sold out</span>}
             </div>
             {t.seats && !t.sold && <p class="tariff__seats">{t.seats}</p>}
             <p class="tariff__tagline">{t.tagline.toLowerCase()}</p>
           </header>
 
-          {t.sold ? (
-            <div class="tariff__price tariff__price--sold">
-              <span class="tariff__sold-label">sold out</span>
+          <div class="tariff__price" data-price-block>
+            <div class="tariff__price-state" data-state="before">
+              {t.oldPrice && <span class="tariff__old">{t.oldPrice}</span>}
+              <span class="tariff__now">{t.price}</span>
+              <span class="tariff__usd">/ {t.priceUsd}</span>
             </div>
-          ) : (
-            <div class="tariff__price" data-price-block>
-              <div class="tariff__price-state" data-state="before">
-                {t.oldPrice && <span class="tariff__old">{t.oldPrice}</span>}
-                <span class="tariff__now">{t.price}</span>
-                <span class="tariff__usd">/ {t.priceUsd}</span>
-              </div>
-              <div class="tariff__price-state" data-state="after" hidden>
-                <span class="tariff__now">{t.oldPrice || t.price}</span>
-                <span class="tariff__usd">/ {t.oldPriceUsd || t.priceUsd}</span>
-              </div>
+            <div class="tariff__price-state" data-state="after" hidden>
+              <span class="tariff__now">{t.oldPrice || t.price}</span>
+              <span class="tariff__usd">/ {t.oldPriceUsd || t.priceUsd}</span>
             </div>
-          )}
+          </div>
 
           <ul class="tariff__features">
             {t.features.map((f) => (
