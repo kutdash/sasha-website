@@ -3,7 +3,7 @@
 export const SITE = {
   title: 'Путь видеографа — by Саша Буртасова',
   description:
-    'Двухмесячный курс по видеографии: с нуля до первых клиентов и стабильного дохода. Старт 13 июля 2026.',
+    'Двухмесячный курс по видеографии: с нуля до первых клиентов и стабильного дохода.',
   url: 'https://sashaburtasova.ru',
   startDate: '13 июля 2026',
   duration: '2 месяца',
@@ -338,7 +338,7 @@ export const TARIFFS = [
     price: '39 900 ₽',
     priceUsd: '510 $',
     seats: '5 из 30 мест',
-    sold: true,
+    sold: false,
     highlighted: true,
     features: [
       'Доступ к материалам на 3 месяца',
