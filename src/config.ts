@@ -338,7 +338,7 @@ export const TARIFFS = [
     price: '39 900 ₽',
     priceUsd: '510 $',
     seats: '5 из 30 мест',
-    sold: false,
+    sold: true,
     highlighted: true,
     features: [
       'Доступ к материалам на 3 месяца',
