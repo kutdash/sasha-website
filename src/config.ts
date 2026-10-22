@@ -317,7 +317,7 @@ export const ROUTES = [
 export const SOCIALS = {
   instagram: 'https://instagram.com/sasha.burtasova',
   telegram: 'https://t.me/burtasovasasha',
-  email: 'alexanyarain@gmail.com',
+  email: 'burtasova2011@yandex.ru',
 };
 
 // Payment / checkout links
